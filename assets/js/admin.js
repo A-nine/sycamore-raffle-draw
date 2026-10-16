@@ -86,7 +86,7 @@
     const demo = SR.demoPool();
     const t = SR.mountTape(host, { worldWidth: 1100 });
     t.setPool(demo.slots, demo.names, true);
-    t.setState({ mode: 'idle', speed: 180, playing: true, anchorT: Date.now(), anchorP: 0, seed: 3 });
+    t.setState({ mode: 'idle', speed: 450, playing: true, anchorT: Date.now(), anchorP: 0, seed: 3 });
     onCleanup(() => t.destroy());
   }
   function signin() {
@@ -213,7 +213,7 @@
     if (s.pool) { shell('upload', head('New draw / Step 1 of 4', 'Upload entrants') + lockedNotice(s)); return; }
     const d = s.draft, err = d.error;
     const fileCard = d.file && !err ? '<div class="card file-row"><div class="file-ico">' + icon('file') + '</div><div style="flex:1;min-width:0"><b>' + esc(d.file.name) + '</b><div class="help">' + (d.file.size / 1048576).toFixed(1) + ' MB \u00b7 ' + d.file.encoding + ' detected' + (d.file.encoding !== 'UTF-8' ? ', converted to UTF-8' : '') + ' \u00b7 ' + d.file.delimiter + '-separated \u00b7 header row found</div></div><span class="badge badge-success">Parsed in ' + ((d.stats.ms || 0) / 1000).toFixed(1) + ' s</span><button class="btn btn-sm btn-secondary" data-clear title="Remove file">' + icon('trash') + '</button></div>'
-      : err ? '<div class="card file-row" style="border-color:#fecaca"><div class="file-ico err">' + icon('alert') + '</div><div style="flex:1;min-width:0"><b>' + esc(err.file || 'File') + '</b><div class="help err">' + esc(err.message) + '</div></div><button class="btn btn-sm btn-secondary" data-clear>' + icon('trash') + '</button></div>' : '';
+      : err ? '<div class="card file-row" style="border-color:#C8D1D5"><div class="file-ico err">' + icon('alert') + '</div><div style="flex:1;min-width:0"><b>' + esc(err.file || 'File') + '</b><div class="help err">' + esc(err.message) + '</div></div><button class="btn btn-sm btn-secondary" data-clear>' + icon('trash') + '</button></div>' : '';
     let summary;
     if (err) {
       summary = '<div class="card card-pad"><h3>We couldn\u2019t read this file</h3><div class="alert alert-error" style="margin-top:16px">' + icon('alert') + '<div><b>' + esc(err.message) + '</b>' + (err.header ? '<div style="margin-top:6px">Columns found: <span class="mono">' + esc(err.header.join(' \u00b7 ') || '(none)') + '</span></div>' : '') + '</div></div>' +
@@ -223,7 +223,7 @@
       summary = '<div class="card card-pad"><h3>Parse summary</h3><div style="margin-top:10px">' +
         '<div class="kv"><span>Total rows read</span><b>' + fmt(d.stats.read) + '</b></div>' +
         '<div class="kv"><span>Empty or blank rows removed</span><b class="muted">' + fmt(d.stats.blank) + '</b></div>' +
-        '<div class="kv"><span>Valid entries</span><b style="color:var(--success)">' + fmt(d.stats.valid) + '</b></div></div>' +
+        '<div class="kv"><span>Valid entries</span><b>' + fmt(d.stats.valid) + '</b></div></div>' +
         '<div class="eyebrow" style="margin:18px 0 10px">Columns detected</div><div class="chips"><span class="badge badge-success">' + esc(d.columns.name) + ' \u00b7 required</span>' +
         (d.columns.email ? '<span class="badge badge-info">' + esc(d.columns.email) + '</span>' : '') + (d.columns.id ? '<span class="badge badge-info">' + esc(d.columns.id) + ' (identifier)</span>' : '') + '</div>' +
         '<div class="eyebrow" style="margin:18px 0 10px">Preview \u00b7 first ' + prev.length + ' rows</div><div class="mini-table"><table><thead><tr><th>Full name</th><th>Email</th><th>Tag</th></tr></thead><tbody>' +
@@ -382,7 +382,7 @@
     if (!store.set(s)) { toast('This browser is out of storage. Try a smaller file.', 'err'); btn.disabled = false; return; }
     saveAudit(s);
     const seed = SR.csprngIndex(100000).index;
-    store.setTape({ mode: 'idle', speed: 300, playing: true, anchorT: Date.now(), anchorP: 0, seed, reveal: null });
+    store.setTape({ mode: 'idle', speed: 800, playing: true, anchorT: Date.now(), anchorP: 0, seed, reveal: null });
     toast('Pool locked. Hash ' + shortHash(poolHash));
     review();
   }
@@ -408,7 +408,7 @@
       '<div class="preview" id="preview" style="--band:130px"><div class="ptop"><div>' + logo({ white: true }) + '<div class="ptitle">' + esc(p.name) + '</div></div><span class="badge badge-live">LIVE</span></div>' +
       '<div class="pfoot">' + fmt(p.slotsCount) + ' slots in the pool \u00b7 pool hash ' + shortHash(p.poolHash) + '</div></div>' +
       '<div class="card speed"><button class="play" data-play aria-label="Pause or play tape"></button><div class="grow"><div class="row between"><b>Tape speed</b><span class="mono" id="spd"></span></div>' +
-      '<input type="range" class="range" min="100" max="1200" step="10" id="speed" style="margin:10px 0 4px"><div class="row between help mono"><span>100</span><span>1200 px/s</span></div></div>' +
+      '<input type="range" class="range" min="100" max="2400" step="20" id="speed" style="margin:10px 0 4px"><div class="row between help mono"><span>100</span><span>2400 px/s</span></div></div>' +
       '<label class="row" style="gap:10px">' + icon('volume') + 'Sound<span class="switch"><input type="checkbox" id="snd"><span></span></span></label></div></div>' +
       '<div class="stack"><div id="drawbox"></div><div class="card card-pad"><div class="row between"><h3>Event log</h3><span class="help">UTC</span></div><ul class="log" id="log"></ul></div>' +
       '<div class="card card-pad"><h3>Audit</h3><p class="help" style="margin:6px 0 14px">Draw ID <span class="mono">' + p.drawId + '</span></p><div class="actions"><a class="btn btn-secondary btn-sm" href="verify.html?id=' + p.drawId + '" target="_blank">' + icon('shieldCheck') + 'Verify page</a><button class="btn btn-danger btn-sm" data-purge ' + (p.piiPurged ? 'disabled' : '') + '>' + icon('trash') + (p.piiPurged ? 'PII purged' : 'Purge PII') + '</button></div></div></div></div>');
@@ -436,7 +436,7 @@
       const sb = $('#stage-badge'); sb.className = 'badge ' + (alive ? 'badge-success' : 'badge-neutral'); sb.textContent = alive ? 'Stage connected \u00b7 1 display' : 'Stage not open';
       $('#mode-badge').textContent = t.mode === 'brake' ? 'Braking \u00b7 6.0 s' : t.mode === 'locked' ? 'Winner locked' : (t.playing ? 'Idle loop \u00b7 ' + t.speed + ' px/s' : 'Tape paused');
       $('#spd').textContent = t.speed + ' px/s';
-      const sp = $('#speed'); sp.value = t.speed; sp.style.setProperty('--p', ((t.speed - 100) / 11) + '%'); sp.disabled = t.mode === 'brake';
+      const sp = $('#speed'); sp.value = t.speed; sp.style.setProperty('--p', ((t.speed - 100) / 23) + '%'); sp.disabled = t.mode === 'brake';
       $('[data-play]').innerHTML = icon(t.playing ? 'pause' : 'play'); $('[data-play]').disabled = t.mode !== 'idle';
       $('#snd').checked = !!p.settings.sound;
       if (t.mode === 'locked' && t.reveal && loggedReveal !== t.lockedAt) {
@@ -450,7 +450,7 @@
       if (t.mode === 'locked' && last) {
         html = '<div class="winner-card"><div class="eyebrow gold">Round ' + last.round + ' winner \u00b7 revealed on stage</div><h2>' + esc(last.name) + '</h2>' +
           '<div class="row" style="flex-wrap:wrap;gap:8px"><span class="badge badge-ondark no-dot mono">' + esc(last.tag || '\u2014') + '</span><span class="badge badge-ondark no-dot mono">Slot #' + pad5(last.slot + 1) + ' of ' + fmt(p.slotsCount) + '</span></div>' +
-          '<p style="color:#c7d6ea;font-size:13px;margin:14px 0">Drawn ' + last.at + ' \u00b7 CSPRNG value ' + last.value + ' \u2192 index ' + (last.value % last.eligible) + ' of ' + fmt(last.eligible) + ' eligible.</p>' +
+          '<p style="color:rgba(255, 255, 255, .75);font-size:13px;margin:14px 0">Drawn ' + last.at + ' \u00b7 CSPRNG value ' + last.value + ' \u2192 index ' + (last.value % last.eligible) + ' of ' + fmt(last.eligible) + ' eligible.</p>' +
           '<div class="actions">' + (n < tot ? '<button class="btn btn-gold" data-next>Next round ' + icon('arrowRight') + '</button>' : '<a class="btn btn-gold" href="verify.html?id=' + p.drawId + '" target="_blank">View certificate</a>') +
           '<button class="btn btn-ondark" data-hide>' + (t.reveal ? 'Hide reveal' : 'Show reveal') + '</button></div></div>';
       } else if (n >= tot) {
@@ -458,7 +458,7 @@
           '<a class="btn btn-gold btn-block" style="margin-top:16px" href="verify.html?id=' + p.drawId + '" target="_blank">Open audit certificate</a></div>';
       } else {
         const braking = t.mode === 'brake';
-        html = '<div class="draw-panel"><div class="row between"><span class="eyebrow gold">Round ' + (n + 1) + ' of ' + tot + '</span><span class="mono" style="font-size:12px;color:#c7d6ea">' + fmt(elig) + ' eligible slots</span></div>' +
+        html = '<div class="draw-panel"><div class="row between"><span class="eyebrow gold">Round ' + (n + 1) + ' of ' + tot + '</span><span class="mono" style="font-size:12px;color:rgba(255, 255, 255, .75)">' + fmt(elig) + ' eligible slots</span></div>' +
           '<button class="btn btn-gold" data-draw ' + (braking || !elig ? 'disabled' : '') + '>' + (braking ? 'Drawing\u2026' : icon('play') + ' Draw winner') + '</button>' +
           '<p>The browser picks a slot with a CSPRNG and sends it to the stage. The tape then brakes over 6.0 s and stops on the winner.</p>' +
           '<p style="margin-top:12px">Shortcut <span class="kbd">Space</span></p></div>';
@@ -494,7 +494,7 @@
       const base = cur.mode === 'locked' ? SR.resumeIdle(cur, Date.now()) : SR.resumeIdle(cur, Date.now());
       base.speed = v; base.reveal = cur.mode === 'locked' ? null : cur.reveal;
       store.setTape(base); tape.setState(base);
-      e.target.style.setProperty('--p', ((v - 100) / 11) + '%'); $('#spd').textContent = v + ' px/s';
+      e.target.style.setProperty('--p', ((v - 100) / 23) + '%'); $('#spd').textContent = v + ' px/s';
       $('#mode-badge').textContent = 'Idle loop \u00b7 ' + v + ' px/s';
     };
     $('#speed').onchange = e => { store.update(x => store.log(x, 'Tape speed ' + e.target.value + ' px/s', 'info')); renderSide(); };

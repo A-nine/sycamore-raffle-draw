@@ -1,24 +1,24 @@
 /* Live stage — broadcast styling (dark, high contrast, 320–3840 px) */
 .stage-body { background: var(--navy-950); color: #fff; overflow: hidden; }
 .stage { position: relative; height: 100vh; height: 100dvh; display: flex; flex-direction: column; background:
-  radial-gradient(60% 50% at 50% 0%, rgba(0, 104, 196, .45), transparent 70%),
-  radial-gradient(50% 40% at 50% 55%, rgba(0, 168, 232, .12), transparent 70%),
-  linear-gradient(180deg, #021a3f 0%, var(--navy-950) 60%, #000a1c 100%); font-size: clamp(14px, 1vw, 30px); }
+  radial-gradient(60% 50% at 50% 0%, rgba(38, 198, 21, .16), transparent 70%),
+  radial-gradient(50% 40% at 50% 55%, rgba(38, 198, 21, .12), transparent 70%),
+  linear-gradient(180deg, #073042 0%, var(--navy-950) 60%, #073042 100%); font-size: clamp(14px, 1vw, 30px); }
 .st-head { display: flex; justify-content: space-between; align-items: center; padding: clamp(16px, 2.6vh, 56px) clamp(16px, 3.3vw, 120px); gap: 16px; position: relative; z-index: 5; }
 .st-head .logo svg { width: clamp(28px, 2.2vw, 64px); height: clamp(28px, 2.2vw, 64px); }
 .st-head .logo .wm b { font-size: clamp(18px, 1.3vw, 40px); }
 .st-event { border-left: 1px solid rgba(255, 255, 255, .2); padding-left: 20px; }
 .st-event .eyebrow { font-size: clamp(10px, .62vw, 18px); }
-.st-event #ev-meta { font-size: clamp(12px, .78vw, 22px); color: #c7d6ea; margin-top: 4px; }
+.st-event #ev-meta { font-size: clamp(12px, .78vw, 22px); color: rgba(255, 255, 255, .75); margin-top: 4px; }
 .st-head .badge { height: clamp(26px, 1.8vw, 52px); padding: 0 clamp(10px, .8vw, 24px); font-size: clamp(11px, .7vw, 20px); }
 .st-hero { text-align: center; padding: clamp(8px, 4vh, 80px) 16px 0; position: relative; z-index: 2; transition: opacity .3s; }
 .st-hero h1 { font-size: clamp(30px, 3.6vw, 140px); line-height: 1.05; letter-spacing: -.03em; }
-.st-hero p { color: #c7d6ea; margin-top: .6em; font-size: clamp(14px, 1.05vw, 36px); }
+.st-hero p { color: rgba(255, 255, 255, .75); margin-top: .6em; font-size: clamp(14px, 1.05vw, 36px); }
 .st-tape { position: relative; flex: 1; min-height: 220px; --band: clamp(150px, 17vw, 520px); }
 .st-tape .arrow { border-left-width: clamp(12px, 1vw, 30px); border-right-width: clamp(12px, 1vw, 30px); }
 .st-tape .arrow.top { border-top-width: clamp(14px, 1.1vw, 34px); }
 .st-tape .arrow.bot { border-bottom-width: clamp(14px, 1.1vw, 34px); }
-.st-status { display: flex; justify-content: center; align-items: center; gap: 8px; color: #c7d6ea; font-size: clamp(12px, .75vw, 24px); padding-bottom: clamp(12px, 3vh, 48px); position: relative; z-index: 2; }
+.st-status { display: flex; justify-content: center; align-items: center; gap: 8px; color: rgba(255, 255, 255, .75); font-size: clamp(12px, .75vw, 24px); padding-bottom: clamp(12px, 3vh, 48px); position: relative; z-index: 2; }
 .st-status .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--success); box-shadow: 0 0 10px var(--success); }
 .st-status .dot.gold { background: var(--gold); box-shadow: 0 0 10px var(--gold); }
 .st-foot { margin: 0 auto clamp(16px, 5vh, 80px); display: grid; grid-template-columns: repeat(4, auto); border: 1px solid rgba(255, 255, 255, .12); background: rgba(255, 255, 255, .04); border-radius: 16px; overflow: hidden; position: relative; z-index: 2; max-width: calc(100% - 32px); }
@@ -34,21 +34,21 @@
 .reveal .st-rounds { opacity: 1; }
 
 /* Reveal: dim 40%, modal, confetti */
-.st-dim { position: absolute; inset: 0; background: rgba(0, 8, 24, .4); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); opacity: 0; pointer-events: none; transition: opacity .5s; z-index: 10; }
+.st-dim { position: absolute; inset: 0; background: rgba(7, 48, 66, .4); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); opacity: 0; pointer-events: none; transition: opacity .5s; z-index: 10; }
 .st-confetti { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 25; }
 .st-modal { position: absolute; left: 50%; top: 50%; width: min(92vw, 62vw, 1500px); min-width: min(92vw, 560px); transform: translate(-50%, -46%) scale(.94); opacity: 0; pointer-events: none; transition: opacity .45s, transform .55s cubic-bezier(.2, .9, .3, 1.2); z-index: 20;
-  background: linear-gradient(170deg, #0a4a95, var(--navy) 40%, var(--navy-900)); border: 2px solid var(--gold); border-radius: clamp(18px, 1.4vw, 40px); box-shadow: 0 0 120px rgba(255, 199, 44, .35), 0 40px 120px rgba(0, 0, 0, .5); text-align: center; overflow: hidden; }
+  background: linear-gradient(170deg, #073042, var(--navy) 40%, var(--navy-900)); border: 2px solid var(--gold); border-radius: clamp(18px, 1.4vw, 40px); box-shadow: 0 0 120px rgba(38, 198, 21, .35), 0 40px 120px rgba(7, 48, 66, .5); text-align: center; overflow: hidden; }
 .reveal .st-dim { opacity: 1; }
 .reveal .st-modal { opacity: 1; transform: translate(-50%, -50%) scale(1); pointer-events: auto; }
 .st-modal .body { padding: clamp(28px, 3vw, 90px) clamp(20px, 3vw, 90px) clamp(24px, 2.4vw, 70px); }
-.st-modal .cup { width: clamp(56px, 4.4vw, 130px); height: clamp(56px, 4.4vw, 130px); border-radius: 50%; background: var(--gold); color: var(--navy); display: grid; place-items: center; margin: 0 auto clamp(14px, 1.4vw, 40px); box-shadow: 0 0 40px rgba(255, 199, 44, .5); }
+.st-modal .cup { width: clamp(56px, 4.4vw, 130px); height: clamp(56px, 4.4vw, 130px); border-radius: 50%; background: var(--gold); color: var(--navy); display: grid; place-items: center; margin: 0 auto clamp(14px, 1.4vw, 40px); box-shadow: 0 0 40px rgba(38, 198, 21, .5); }
 .st-modal .cup svg { width: 46%; height: 46%; }
 .st-modal .eyebrow { font-size: clamp(11px, .75vw, 22px); }
 .st-modal h2 { font-size: clamp(48px, 6.7vw, 260px); line-height: 1; letter-spacing: -.035em; margin: .2em 0 .25em; overflow-wrap: anywhere; }
 .st-modal .chips { justify-content: center; gap: 10px; }
-.st-modal .chip { font-family: var(--mono); font-size: clamp(12px, .85vw, 26px); color: var(--cyan); border: 1px solid rgba(0, 168, 232, .35); background: rgba(0, 168, 232, .08); border-radius: 999px; padding: .5em 1em; }
-.st-modal .congrats { color: #dbe7f5; font-size: clamp(14px, 1vw, 32px); margin-top: 1.1em; }
-.st-modal .hash { display: flex; gap: clamp(12px, 1vw, 30px); align-items: flex-start; text-align: left; background: rgba(0, 0, 0, .25); border-top: 1px solid rgba(255, 255, 255, .1); padding: clamp(14px, 1.3vw, 40px) clamp(18px, 2vw, 60px); opacity: 0; transform: translateY(10px); transition: opacity .4s 1.2s, transform .4s 1.2s; }
+.st-modal .chip { font-family: var(--mono); font-size: clamp(12px, .85vw, 26px); color: var(--cyan); border: 1px solid rgba(38, 198, 21, .35); background: rgba(38, 198, 21, .08); border-radius: 999px; padding: .5em 1em; }
+.st-modal .congrats { color: rgba(255, 255, 255, .88); font-size: clamp(14px, 1vw, 32px); margin-top: 1.1em; }
+.st-modal .hash { display: flex; gap: clamp(12px, 1vw, 30px); align-items: flex-start; text-align: left; background: rgba(7, 48, 66, .25); border-top: 1px solid rgba(255, 255, 255, .1); padding: clamp(14px, 1.3vw, 40px) clamp(18px, 2vw, 60px); opacity: 0; transform: translateY(10px); transition: opacity .4s 1.2s, transform .4s 1.2s; }
 .reveal .st-modal .hash { opacity: 1; transform: none; }
 .st-modal .hash .ok { width: clamp(30px, 2vw, 60px); height: clamp(30px, 2vw, 60px); border-radius: 10px; background: var(--success); display: grid; place-items: center; flex: none; }
 .st-modal .hash .ok svg { width: 55%; height: 55%; }
@@ -87,3 +87,6 @@
   .st-tape { min-height: 300px; }
 }
 .st-head .logo img { height: clamp(34px, 2.5vw, 84px); }
+.st-modal .hash { background: rgba(255, 255, 255, .05); }
+.st-modal .hash .ok { color: var(--navy); }
+.st-status .dot, .st-status .dot.gold { background: var(--green); box-shadow: 0 0 10px var(--green); }

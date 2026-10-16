@@ -94,7 +94,7 @@
     update(fn) { const s = store.get(); fn(s); store.set(s); return s; },
     reset() { try { localStorage.removeItem(KEY); localStorage.removeItem(TAPE); } catch (e) { } },
     log(s, msg, kind) { s.log.unshift({ t: Date.now(), msg, kind: kind || '' }); s.log = s.log.slice(0, 60); },
-    tape() { return read(TAPE, { mode: 'idle', speed: 300, playing: true, anchorT: Date.now(), anchorP: 0 }); },
+    tape() { return read(TAPE, { mode: 'idle', speed: 800, playing: true, anchorT: Date.now(), anchorP: 0 }); },
     setTape(t) { write(TAPE, t); },
     audits() { return read(AUDITS, {}); },
     saveAudit(a) { const all = store.audits(); all[a.drawId] = a; return write(AUDITS, all); },
@@ -269,7 +269,7 @@
 
   /* ---------------- Tape engine ----------------
      Offsets are in "cards": card i is centred when offset === i.
-     Idle speed is in px/s at a nominal 300 px pitch (brief: 300 px/s idle, 100\u20131200 px/s).
+     Idle speed is in px/s at a nominal 300 px pitch (default 800 px/s, slider 100\u20132400 px/s).
      Braking runs a cubic p(\u03c4)=p0+v0\u03c4+a\u03c4\u00b2+b\u03c4\u00b3 that starts at the current speed and lands
      exactly on card L after T seconds with zero velocity (\u00b10 px lock, well inside \u00b11 px). */
   const PX_PER_CARD = 300, BRAKE_S = 6.0, MIN_TRAVEL = 7;
@@ -288,7 +288,7 @@
   function planBrake(t, now, winnerSlot) {
     const p0 = tapeOffset(t, now).p;
     const v0 = t.mode === 'idle' && t.playing ? t.speed / PX_PER_CARD : 0;
-    const L = Math.ceil(p0 + Math.max(v0 * BRAKE_S * 0.5, MIN_TRAVEL));
+    const L = Math.ceil(p0 + Math.max(v0 * BRAKE_S * 0.6, MIN_TRAVEL));
     return { mode: 'brake', t0: now, p0, v0, T: BRAKE_S, L, slot: winnerSlot, speed: t.speed, playing: t.playing, seed: t.seed };
   }
   function resumeIdle(t, now) {
@@ -429,7 +429,7 @@
     const ctx = canvas.getContext('2d');
     const dpr = Math.min(2, global.devicePixelRatio || 1);
     const W = canvas.width = canvas.clientWidth * dpr, H = canvas.height = canvas.clientHeight * dpr;
-    const cols = ['#FFC72C', '#00A8E8', '#FFFFFF', '#10B981', '#FFC72C'];
+    const cols = ['#26C615', '#26C615', '#FFFFFF', '#26C615', '#26C615'];
     const parts = Array.from({ length: 220 }, () => ({
       x: Math.random() * W, y: -Math.random() * H * 0.6, w: (4 + Math.random() * 6) * dpr, h: (8 + Math.random() * 10) * dpr,
       vx: (Math.random() - 0.5) * 2 * dpr, vy: (2 + Math.random() * 4) * dpr, r: Math.random() * 6, vr: (Math.random() - 0.5) * 0.25,

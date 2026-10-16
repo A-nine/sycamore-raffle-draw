@@ -26,6 +26,8 @@ Before the first round, open the stage from the control room (**Open stage**) an
 - Sign-in and MFA are front-end only. Any email, password and 6-digit code works. Real authentication needs the SISL backend.
 - Data stays in the browser that created it. Remote viewers on other devices need a realtime backend, such as WebSockets.
 - DM Sans stands in for Satoshi/Arial. Logos are the official Brand Drive SVGs in `assets/brand`.
+- Colours use only the brand palette (`assets/brand/brand-colors.png`): green `#26C615`, navy `#073042` and white `#FFFFFF`, plus tints and transparencies of those three.
+- The tape idles at 800 px/s by default. The control room slider goes from 100 to 2400 px/s, and braking still takes 6.0 s.
 
 ## Run locally
 

@@ -20,7 +20,7 @@
     setStatus('Winner locked', true);
     $('#headline').textContent = 'We have a winner';
     $('#subline').textContent = 'Locked in the centre frame. Verified with SHA-256.';
-    if (demo) { demoState = { mode: 'locked', L: tape.state.L, slot: tape.state.slot, speed: 300, playing: true, seed: tape.state.seed, reveal: 1 }; tape.setState(demoState); setTimeout(() => applyReveal(demoState), 1200); }
+    if (demo) { demoState = { mode: 'locked', L: tape.state.L, slot: tape.state.slot, speed: 800, playing: true, seed: tape.state.seed, reveal: 1 }; tape.setState(demoState); setTimeout(() => applyReveal(demoState), 1200); }
   };
 
   function soundOK() {
@@ -41,7 +41,7 @@
       const d = SR.demoPool();
       pool = { name: 'Sycamore Raffle Draw', slots: d.slots, names: d.names, slotsCount: d.slots.length, settings: { winners: 1, showTag: true }, mode: 'WEIGHTED_SLOT', poolHash: '', drawId: '' };
       tape.setPool(d.slots, d.names, true);
-      demoState = { mode: 'idle', speed: 300, playing: true, anchorT: Date.now(), anchorP: 0, seed: 5 };
+      demoState = { mode: 'idle', speed: 800, playing: true, anchorT: Date.now(), anchorP: 0, seed: 5 };
       tape.setState(demoState);
     }
     header(); footer(); sync();
