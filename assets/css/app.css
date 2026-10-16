@@ -348,3 +348,8 @@ input[type=range].range::-moz-range-thumb { width: 16px; height: 16px; border-ra
   .page-head .actions { width: 100%; }
 }
 @media (max-width: 640px) { .preview .ptitle { display: none; } }
+
+/* Official logo image */
+.logo img { display: block; height: 40px; width: auto; }
+.mobile-bar .logo img { height: 32px; }
+.preview .logo img { height: 30px; }

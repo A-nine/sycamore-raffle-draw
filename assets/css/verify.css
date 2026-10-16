@@ -90,3 +90,5 @@
   .cert { box-shadow: none; }
   .cert-top { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
+.v-nav .logo img { height: 34px; }
+.v-foot .logo img { height: 40px; }

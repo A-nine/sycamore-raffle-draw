@@ -25,7 +25,7 @@ Before the first round, open the stage from the control room (**Open stage**) an
 
 - Sign-in and MFA are front-end only. Any email, password and 6-digit code works. Real authentication needs the SISL backend.
 - Data stays in the browser that created it. Remote viewers on other devices need a realtime backend, such as WebSockets.
-- DM Sans stands in for Satoshi/Arial, and the logo is a recreated vector. Swap in the official Brand Drive SVGs when you have them.
+- DM Sans stands in for Satoshi/Arial. Logos are the official Brand Drive SVGs in `assets/brand`.
 
 ## Run locally
 

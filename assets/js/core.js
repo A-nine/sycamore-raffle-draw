@@ -42,16 +42,13 @@
     return '<svg class="i ' + (cls || '') + '" viewBox="0 0 24 24" aria-hidden="true">' + (ICONS[name] || '') + '</svg>';
   }
 
-  /* Recreated Sycamore mark: rounded square holding two offset pills */
+  /* Official Sycamore logo (Brand Drive SVGs in assets/brand) */
   function logo(opts) {
     opts = opts || {};
-    const white = opts.white;
     const tag = opts.href ? 'a' : 'span';
     const href = opts.href ? ' href="' + opts.href + '"' : '';
-    return '<' + tag + href + ' class="logo' + (white ? ' white' : '') + '" aria-label="Sycamore">' +
-      '<svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="10" fill="none" stroke="currentColor" stroke-width="3.4"/>' +
-      '<rect x="9.5" y="11" width="17" height="7.4" rx="3.7" fill="currentColor"/><rect x="13.5" y="21.6" width="17" height="7.4" rx="3.7" fill="currentColor"/></svg>' +
-      '<span class="wm"><b>Sycamore</b><small>..More for you</small></span></' + tag + '>';
+    return '<' + tag + href + ' class="logo' + (opts.white ? ' white' : '') + '">' +
+      '<img src="assets/brand/logo-' + (opts.white ? 'white' : 'blue') + '.svg" alt="Sycamore" width="147" height="40"></' + tag + '>';
   }
 
   /* ---------------- Small utils ---------------- */
