@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sycamore Raffle Draw — Live stage</title>
+  <meta name="theme-color" content="#00102A">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,500;9..40,700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/app.css">
+  <link rel="stylesheet" href="assets/css/stage.css">
+</head>
+<body class="stage-body">
+  <div class="stage" id="stage">
+    <header class="st-head">
+      <div class="row" style="gap:20px">
+        <span id="logo"></span>
+        <div class="st-event"><div class="eyebrow gold" id="ev-name">Sycamore Raffle Draw</div><div id="ev-meta">Waiting for a locked pool</div></div>
+      </div>
+      <div class="row" style="gap:10px">
+        <span class="badge badge-ondark no-dot" id="pool-count"></span>
+        <span class="badge badge-live" id="live">LIVE</span>
+      </div>
+    </header>
+
+    <section class="st-hero">
+      <h1 id="headline">Every entrant is in the pool</h1>
+      <p id="subline">Watch the tape. Every name you see could win.</p>
+    </section>
+
+    <div class="st-tape" id="tape"></div>
+
+    <div class="st-status"><span class="dot" id="st-dot"></span><span id="status">Tape running</span></div>
+
+    <footer class="st-foot" id="foot"></footer>
+
+    <nav class="st-rounds" id="rounds"></nav>
+
+    <div class="st-dim" id="dim"></div>
+    <canvas class="st-confetti" id="confetti"></canvas>
+    <div class="st-modal" id="modal" role="dialog" aria-live="assertive" aria-label="Winner"></div>
+
+    <button class="st-sound" id="sound-btn">Click to enable sound</button>
+    <button class="st-fs" id="fs" title="Full screen (F)" aria-label="Full screen"></button>
+  </div>
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/stage.js"></script>
+</body>
+</html>

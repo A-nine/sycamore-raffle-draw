@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Redirecting — Sycamore Raffle Draw</title>
+  <script>
+    /* GitHub Pages fallback: /verify/:drawId -> verify.html?id=:drawId, /stage -> stage.html */
+    (function () {
+      var path = location.pathname, m = path.match(/^(.*?)\/verify\/([\w-]+)\/?$/), s = path.match(/^(.*?)\/stage\/?.*$/);
+      if (m) location.replace(m[1] + '/verify.html?id=' + m[2]);
+      else if (s) location.replace(s[1] + '/stage.html');
+      else location.replace(path.replace(/\/[^\/]*$/, '/') + 'index.html');
+    })();
+  </script>
+</head>
+<body style="font-family:Arial,sans-serif;background:#F4F7FA;color:#0F172A;display:grid;place-items:center;height:100vh;margin:0">
+  <p>Redirecting… <a href="index.html">Go to Sycamore Raffle Draw</a></p>
+</body>
+</html>

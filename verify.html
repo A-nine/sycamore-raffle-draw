@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Verify a draw — Sycamore Raffle Draw</title>
+  <meta name="description" content="Check any Sycamore raffle draw yourself: recompute the SHA-256 pool hash and the winning index in your browser.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,500;9..40,700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/app.css">
+  <link rel="stylesheet" href="assets/css/verify.css">
+</head>
+<body class="v-body">
+  <header class="v-nav-wrap">
+    <nav class="v-nav">
+      <span id="logo"></span>
+      <div class="v-links"><a href="#how">How draws work</a><a href="#check">Verify a draw</a><a href="#faq">FAQs</a></div>
+      <a class="btn btn-sm v-cta" href="https://sycamore.ng" target="_blank" rel="noopener">sycamore.ng ↗</a>
+    </nav>
+  </header>
+
+  <section class="v-hero">
+    <span class="badge" id="status-badge">Checking…</span>
+    <h1 id="hero-title">Checking this draw…</h1>
+    <p id="hero-sub">Recomputing the pool hash and every winning index in your browser.</p>
+  </section>
+
+  <main class="v-main">
+    <article class="cert" id="cert"></article>
+
+    <section class="v-two" id="check">
+      <div class="v-steps" id="how">
+        <h2>Check it yourself in three steps</h2>
+        <ol>
+          <li><span>1</span><div><b>Download the pool</b><p>The redacted, ordered slot list (JSON) and the draw metadata.</p></div></li>
+          <li><span>2</span><div><b>Run the verifier</b><p>Paste the snippet into any browser console, or run it with Node 18+.</p></div></li>
+          <li><span>3</span><div><b>Compare the results</b><p>The hash and winning indexes should match this certificate exactly.</p></div></li>
+        </ol>
+        <div class="actions" id="downloads"></div>
+        <div class="v-upload">
+          <b>Verify files you already have</b>
+          <p class="help">Pick a pool JSON and its metadata JSON. Nothing is uploaded; the check runs on this page.</p>
+          <div class="actions" style="margin-top:12px">
+            <label class="btn btn-secondary btn-sm">Pool JSON<input type="file" accept=".json,application/json" class="sr-only" id="f-pool"></label>
+            <label class="btn btn-secondary btn-sm">Metadata JSON<input type="file" accept=".json,application/json" class="sr-only" id="f-meta"></label>
+          </div>
+          <p class="help" id="f-status" style="margin-top:8px"></p>
+        </div>
+      </div>
+      <div class="code-card">
+        <div class="code-top"><span class="dots"><i></i><i></i><i></i></span><span class="mono">verify.js</span><button class="copy" id="copy">Copy</button></div>
+        <pre id="code"></pre>
+        <div class="code-res" id="code-res"></div>
+      </div>
+    </section>
+
+    <section class="v-faq" id="faq">
+      <h2>FAQs</h2>
+      <details><summary>What does the pool hash prove?</summary><p>Before any winner is drawn, the ordered list of slots is frozen and hashed with SHA-256. If a single slot were added, removed or reordered afterwards, the hash would change. The hash is shown on the live stage, so everyone sees it before the draw.</p></details>
+      <details><summary>How is the winner picked?</summary><p>The browser’s cryptographically secure random number generator (crypto.getRandomValues) returns a 32-bit number. Values that would bias the result are thrown away (rejection sampling), and the winning index is that number modulo the count of eligible slots.</p></details>
+      <details><summary>Why are names shortened?</summary><p>To protect entrants’ privacy, the public pool keeps only first names, last initials and masked tags such as @ada•••89. Emails and identifiers are never published.</p></details>
+      <details><summary>What does “without replacement” mean?</summary><p>Once someone wins, all of their slots are removed before the next round, so each person can win only once. The verifier applies the same rule.</p></details>
+    </section>
+  </main>
+
+  <footer class="v-foot">
+    <div class="v-foot-in">
+      <div><span id="logo2"></span><p>© Sycamore Capital Group. Raffle Draw is run by Sycamore Integrated Solutions Limited.</p></div>
+      <div class="v-foot-links"><a href="https://sycamore.ng" target="_blank" rel="noopener">Privacy Policy</a><a href="https://sycamore.ng" target="_blank" rel="noopener">Terms &amp; Conditions</a><a href="https://sycamore.ng" target="_blank" rel="noopener">Data Rights</a><a href="index.html">Admin</a></div>
+    </div>
+  </footer>
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/verify.js"></script>
+</body>
+</html>
