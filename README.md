@@ -19,7 +19,9 @@ A static HTML/CSS/JS build of the Sycamore Raffle Draw platform. It follows the 
 4. **Draw.** `crypto.getRandomValues` plus rejection sampling picks the slot. The tape brakes over 6.0 s along a cubic curve and lands exactly on that card.
 5. **Verify.** Download `pool_<id>.json` and `metadata_<id>.json`, then run the snippet shown on the verify page, or upload both files there.
 
-Before the first round, open the stage from the control room (**Open stage**) and move it to the projector screen. The two screens sync through `localStorage` events in the same browser. Shortcuts: <kbd>Space</kbd> draws (in the control room), <kbd>F</kbd> toggles full screen on the stage.
+Before the first round, open the stage from the control room (**Open stage**) and move it to the projector screen. The two screens sync through `localStorage` events in the same browser. Shortcuts: <kbd>Space</kbd> draws (in the control room), <kbd>F</kbd> toggles full screen and <kbd>T</kbd> toggles light/dark mode on the stage.
+
+**Light mode:** use the toggle in the admin sidebar, in Settings → Appearance, on the stage or in the verify page nav. It uses the same brand colours (white surfaces, navy text, green accents), applies to every page, and syncs to an open stage. The choice is remembered in the browser.
 
 ## Limits of this static build
 

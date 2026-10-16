@@ -36,6 +36,8 @@
     calendar: '<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',
     clock: '<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',
     refresh: '<path d="M21 2v6h-6M3 12a9 9 0 0 1 15-6.7L21 8M3 22v-6h6M21 12a9 9 0 0 1-15 6.7L3 16"/>',
+    sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>',
+    moon: '<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/>',
     shuffle: '<path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/>'
   };
   function icon(name, cls) {
@@ -48,7 +50,9 @@
     const tag = opts.href ? 'a' : 'span';
     const href = opts.href ? ' href="' + opts.href + '"' : '';
     return '<' + tag + href + ' class="logo' + (opts.white ? ' white' : '') + '">' +
-      '<img src="assets/brand/logo-' + (opts.white ? 'white' : 'blue') + '.svg" alt="Sycamore" width="147" height="40"></' + tag + '>';
+      (opts.white
+        ? '<img class="on-dark" src="assets/brand/logo-white.svg" alt="Sycamore" width="147" height="40"><img class="on-light" src="assets/brand/logo-blue.svg" alt="Sycamore" width="147" height="40">'
+        : '<img src="assets/brand/logo-blue.svg" alt="Sycamore" width="147" height="40">') + '</' + tag + '>';
   }
 
   /* ---------------- Small utils ---------------- */
@@ -102,6 +106,30 @@
     stageAlive() { try { return Date.now() - Number(localStorage.getItem(PING) || 0) < 5000; } catch (e) { return false; } },
     KEY, TAPE, PING, AUDITS
   };
+
+  /* ---------------- Theme (brand dark / light mode), shared by every page ---------------- */
+  const THEME = 'sr.theme';
+  const theme = {
+    get() { try { return localStorage.getItem(THEME) === 'light' ? 'light' : 'dark'; } catch (e) { return 'dark'; } },
+    apply(v) {
+      v = v || theme.get();
+      document.documentElement.setAttribute('data-theme', v);
+      const m = document.querySelector('meta[name=theme-color]'); if (m) m.setAttribute('content', v === 'light' ? '#FFFFFF' : '#073042');
+      document.querySelectorAll('[data-theme-toggle]').forEach(b => { b.innerHTML = theme.label(v); b.setAttribute('aria-pressed', String(v === 'light')); });
+      document.querySelectorAll('[data-theme-switch]').forEach(i => { i.checked = v === 'light'; });
+    },
+    set(v) { try { localStorage.setItem(THEME, v); } catch (e) { } theme.apply(v); },
+    toggle() { theme.set(theme.get() === 'light' ? 'dark' : 'light'); },
+    label(v) { return v === 'light' ? icon('moon') + '<span>Dark mode</span>' : icon('sun') + '<span>Light mode</span>'; },
+    bind(root) {
+      (root || document).querySelectorAll('[data-theme-toggle]').forEach(b => { b.onclick = theme.toggle; });
+      (root || document).querySelectorAll('[data-theme-switch]').forEach(i => { i.onchange = () => theme.set(i.checked ? 'light' : 'dark'); });
+      theme.apply();
+    },
+    KEY: THEME
+  };
+  global.addEventListener('storage', e => { if (e.key === THEME) theme.apply(); });
+  theme.apply();
 
   /* ---------------- CSV ingest (brief \u00a7CSV) ---------------- */
   function decode(buf) {
@@ -429,7 +457,7 @@
     const ctx = canvas.getContext('2d');
     const dpr = Math.min(2, global.devicePixelRatio || 1);
     const W = canvas.width = canvas.clientWidth * dpr, H = canvas.height = canvas.clientHeight * dpr;
-    const cols = ['#26C615', '#26C615', '#FFFFFF', '#26C615', '#26C615'];
+    const cols = theme.get() === 'light' ? ['#26C615', '#073042', '#26C615', '#073042', '#26C615'] : ['#26C615', '#26C615', '#FFFFFF', '#26C615', '#26C615'];
     const parts = Array.from({ length: 220 }, () => ({
       x: Math.random() * W, y: -Math.random() * H * 0.6, w: (4 + Math.random() * 6) * dpr, h: (8 + Math.random() * 10) * dpr,
       vx: (Math.random() - 0.5) * 2 * dpr, vy: (2 + Math.random() * 4) * dpr, r: Math.random() * 6, vr: (Math.random() - 0.5) * 0.25,
@@ -463,7 +491,7 @@
   }
 
   global.SR = {
-    icon, logo, $, $$, esc, fmt, pad5, isoNow, hhmmss, shortHash, toast,
+    icon, logo, theme, $, $$, esc, fmt, pad5, isoNow, hhmmss, shortHash, toast,
     store, ingest, normalise, analyse, buildPool, shortName, maskTag, maskEmail,
     sha256Hex, uuid, csprngIndex, eligibleSlots, sound,
     tapeOffset, planBrake, resumeIdle, finishBrake, scheduleReveal, mountTape, confetti, demoPool, BRAKE_S

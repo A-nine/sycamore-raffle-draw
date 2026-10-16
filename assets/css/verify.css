@@ -96,3 +96,5 @@
 .dots i:nth-child(2) { background: rgba(255, 255, 255, .55); }
 .dots i:nth-child(3) { background: var(--green); }
 .cert-top { background: var(--navy); background-image: radial-gradient(70% 140% at 100% 0%, rgba(38, 198, 21, .22), transparent 60%); }
+.v-theme { height: 34px; }
+@media (max-width: 560px) { .v-theme span { display: none; } .v-theme { width: 34px; padding: 0; justify-content: center; } }

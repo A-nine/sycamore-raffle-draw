@@ -90,3 +90,5 @@
 .st-modal .hash { background: rgba(255, 255, 255, .05); }
 .st-modal .hash .ok { color: var(--navy); }
 .st-status .dot, .st-status .dot.gold { background: var(--green); box-shadow: 0 0 10px var(--green); }
+.st-theme { position: absolute; left: 66px; bottom: 16px; z-index: 40; }
+@media (max-width: 640px) { .st-theme { left: auto; right: 128px; bottom: auto; top: 18px; width: 36px; padding: 0; justify-content: center; } .st-theme span { display: none; } }

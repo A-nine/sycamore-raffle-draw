@@ -27,6 +27,7 @@
     if (r === 'signin' && a === 'ok') r = 'overview';
     document.title = 'Sycamore Raffle Draw \u2014 ' + ({ signin: 'Sign in', mfa: 'Verify', control: 'Control room' }[r] || r[0].toUpperCase() + r.slice(1));
     routes[r]();
+    SR.theme.bind(app);
     window.scrollTo(0, 0);
   }
   window.addEventListener('hashchange', route);
@@ -46,7 +47,7 @@
       '<div class="brand">' + logo({ white: true, href: '#/overview' }) + '<span class="pill-gold">RAFFLE DRAW</span></div>' +
       '<nav class="nav"><div class="eyebrow">Workspace</div>' +
       NAV.map(([r, ic, label]) => '<a href="#/' + r + '" class="' + (r === active ? 'active' : '') + '">' + icon(ic) + label + '</a>').join('') +
-      '</nav><div class="side-foot"><div class="stage-box"><div class="row" style="gap:8px;color:#fff;font-weight:700">' + icon('monitor') + 'Stage display</div>' +
+      '</nav><div class="side-foot"><button class="theme-btn" data-theme-toggle></button><div class="stage-box"><div class="row stage-ttl">' + icon('monitor') + 'Stage display</div>' +
       '<a href="stage.html" target="sycamore-stage">' + esc(stageURL().replace(/^https?:\/\//, '')) + '</a></div>' +
       '<div class="me"><div class="avatar">' + esc(ini) + '</div><div class="who"><b>' + esc(nm) + '</b><small>Raffle admin \u00b7 MFA on</small></div>' +
       '<button title="Sign out" data-signout>' + icon('logout') + '</button></div></div></aside>' +
@@ -91,7 +92,7 @@
   }
   function signin() {
     app.innerHTML = '<div class="auth">' + authArt() +
-      '<section class="auth-form"><form novalidate>' +
+      '<section class="auth-form"><button class="theme-btn auth-theme" data-theme-toggle></button><form novalidate>' +
       '<div><h2>Admin sign in</h2><p class="muted" style="margin-top:8px">Use your Sycamore work email. We\u2019ll ask for a one-time code next.</p></div>' +
       '<div class="field"><label for="em">Work email</label><input class="input" id="em" type="email" autocomplete="username" placeholder="you@sycamore.ng" value="' + esc(auth.email()) + '"><span class="help err hidden" id="em-err">Enter a valid email address.</span></div>' +
       '<div class="field"><label for="pw">Password</label><input class="input" id="pw" type="password" autocomplete="current-password" placeholder="\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022"><span class="help err hidden" id="pw-err">Enter your password.</span></div>' +
@@ -117,7 +118,7 @@
   function mfa() {
     const em = auth.email();
     app.innerHTML = '<div class="auth">' + authArt() +
-      '<section class="auth-form"><form novalidate>' +
+      '<section class="auth-form"><button class="theme-btn auth-theme" data-theme-toggle></button><form novalidate>' +
       '<div class="lock-card" style="position:static;padding:0;background:none;color:var(--ink)"><div class="ico">' + icon('shieldCheck') + '</div></div>' +
       '<div><h2>Enter your 6-digit code</h2><p class="muted" style="margin-top:8px">Open your authenticator app for <b style="color:var(--ink)">' + esc(em) + '</b>.</p></div>' +
       '<div class="otp">' + Array.from({ length: 6 }, (_, i) => '<input inputmode="numeric" maxlength="1" aria-label="Digit ' + (i + 1) + '">').join('') + '</div>' +
@@ -450,7 +451,7 @@
       if (t.mode === 'locked' && last) {
         html = '<div class="winner-card"><div class="eyebrow gold">Round ' + last.round + ' winner \u00b7 revealed on stage</div><h2>' + esc(last.name) + '</h2>' +
           '<div class="row" style="flex-wrap:wrap;gap:8px"><span class="badge badge-ondark no-dot mono">' + esc(last.tag || '\u2014') + '</span><span class="badge badge-ondark no-dot mono">Slot #' + pad5(last.slot + 1) + ' of ' + fmt(p.slotsCount) + '</span></div>' +
-          '<p style="color:rgba(255, 255, 255, .75);font-size:13px;margin:14px 0">Drawn ' + last.at + ' \u00b7 CSPRNG value ' + last.value + ' \u2192 index ' + (last.value % last.eligible) + ' of ' + fmt(last.eligible) + ' eligible.</p>' +
+          '<p class="wc-meta">Drawn ' + last.at + ' \u00b7 CSPRNG value ' + last.value + ' \u2192 index ' + (last.value % last.eligible) + ' of ' + fmt(last.eligible) + ' eligible.</p>' +
           '<div class="actions">' + (n < tot ? '<button class="btn btn-gold" data-next>Next round ' + icon('arrowRight') + '</button>' : '<a class="btn btn-gold" href="verify.html?id=' + p.drawId + '" target="_blank">View certificate</a>') +
           '<button class="btn btn-ondark" data-hide>' + (t.reveal ? 'Hide reveal' : 'Show reveal') + '</button></div></div>';
       } else if (n >= tot) {
@@ -458,7 +459,7 @@
           '<a class="btn btn-gold btn-block" style="margin-top:16px" href="verify.html?id=' + p.drawId + '" target="_blank">Open audit certificate</a></div>';
       } else {
         const braking = t.mode === 'brake';
-        html = '<div class="draw-panel"><div class="row between"><span class="eyebrow gold">Round ' + (n + 1) + ' of ' + tot + '</span><span class="mono" style="font-size:12px;color:rgba(255, 255, 255, .75)">' + fmt(elig) + ' eligible slots</span></div>' +
+        html = '<div class="draw-panel"><div class="row between"><span class="eyebrow gold">Round ' + (n + 1) + ' of ' + tot + '</span><span class="mono dp-count">' + fmt(elig) + ' eligible slots</span></div>' +
           '<button class="btn btn-gold" data-draw ' + (braking || !elig ? 'disabled' : '') + '>' + (braking ? 'Drawing\u2026' : icon('play') + ' Draw winner') + '</button>' +
           '<p>The browser picks a slot with a CSPRNG and sends it to the stage. The tape then brakes over 6.0 s and stops on the winner.</p>' +
           '<p style="margin-top:12px">Shortcut <span class="kbd">Space</span></p></div>';
@@ -564,9 +565,10 @@
       '<div class="setting"><div><b>Uploaded CSV files</b><small>The raw file is read in your browser and never uploaded or kept. Production deletes server copies after 24 h.</small></div><span class="badge badge-success">Not stored</span></div>' +
       '<div class="setting"><div><b>Start a new draw</b><small>Archives the current draw (its certificate stays available) and clears the workspace.</small></div><button class="btn btn-secondary btn-sm" data-new>New draw</button></div>' +
       '<div class="setting"><div><b>Reset this device</b><small>Deletes every draw, certificate and setting stored in this browser.</small></div><button class="btn btn-danger btn-sm" data-reset>Reset</button></div></div>' +
+      '<div class="stack"><div class="card card-pad"><h3>Appearance</h3><div class="setting" style="border-top:0"><div><b>Light mode</b><small>White surfaces, navy text and green accents. Applies to the admin, the live stage and the verify page, and syncs to an open stage.</small></div><label class="switch"><input type="checkbox" data-theme-switch><span></span></label></div></div>' +
       '<div class="card card-pad"><h3>Account</h3><div class="setting" style="border-top:0"><div><b>' + esc(auth.email()) + '</b><small>Role: Admin</small></div><span class="badge badge-success">MFA on</span></div>' +
       '<div class="setting"><div><b>Viewer link</b><small>Read-only. Anyone with the link can watch the stage.</small></div><button class="btn btn-secondary btn-sm" data-copy>' + icon('copy') + 'Copy</button></div>' +
-      '<div class="alert alert-info" style="margin-top:12px">' + icon('info') + '<div>This is a static demo build. Draws sync between tabs in this browser. Remote viewers and real MFA need the SISL backend.</div></div></div></div>');
+      '<div class="alert alert-info" style="margin-top:12px">' + icon('info') + '<div>This is a static demo build. Draws sync between tabs in this browser. Remote viewers and real MFA need the SISL backend.</div></div></div></div></div>');
     const pg = $('[data-purge]'); if (pg) pg.onclick = () => { if (purgePII()) settings(); };
     $('[data-new]').onclick = () => {
       if (!confirm('Start a new draw? The current workspace is cleared. Certificates of locked draws stay in the audit log.')) return;

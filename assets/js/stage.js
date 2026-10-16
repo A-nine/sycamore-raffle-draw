@@ -108,7 +108,7 @@
       '<h2>' + esc(w.name || w.label) + '</h2><div class="chips">' + (pool.settings.showTag && w.tag ? '<span class="chip">' + esc(w.tag) + '</span>' : '') +
       '<span class="chip">Slot #' + pad5(w.slot + 1) + ' of ' + fmt(pool.slotsCount) + '</span></div>' +
       '<p class="congrats">Congratulations! The Sycamore team will contact you within 24 hours.</p></div>' +
-      (demo ? '<div class="hash"><div class="ok">' + icon('info') + '</div><div><div class="eyebrow" style="color:var(--cyan)">Demo stage</div><code>Lock a pool in the admin console to get a SHA-256 pool hash and a public verify link.</code></div></div>'
+      (demo ? '<div class="hash"><div class="ok">' + icon('info') + '</div><div><div class="eyebrow">Demo stage</div><code>Lock a pool in the admin console to get a SHA-256 pool hash and a public verify link.</code></div></div>'
         : '<div class="hash"><div class="ok">' + icon('shieldCheck') + '</div><div><div class="eyebrow">Verified draw \u00b7 SHA-256 \u00b7 ' + esc(w.at) + '</div><code>' + esc(pool.poolHash) + '</code>' +
         '<a href="verify.html?id=' + pool.drawId + '" target="_blank">Check it at ' + esc(location.host || 'this site') + '/verify/' + pool.drawId.slice(0, 8) + '</a></div></div>');
     stage.classList.add('reveal');
@@ -155,6 +155,7 @@
   document.addEventListener('keydown', e => {
     if (e.code === 'Space') { e.preventDefault(); demoDraw(); }
     if (e.key === 'f' || e.key === 'F') toggleFS();
+    if (e.key === 't' || e.key === 'T') SR.theme.toggle();
   });
   function toggleFS() { if (document.fullscreenElement) document.exitFullscreen(); else if (stage.requestFullscreen) stage.requestFullscreen().catch(() => { }); }
   $('#fs').onclick = toggleFS;
@@ -165,5 +166,6 @@
   window.addEventListener('beforeunload', () => { try { localStorage.removeItem(store.PING); } catch (e) { } });
   window.addEventListener('resize', () => { if (stopConfetti && stage.classList.contains('reveal')) { stopConfetti(); stopConfetti = SR.confetti($('#confetti'), 3000); } });
 
+  SR.theme.bind();
   load();
 })();

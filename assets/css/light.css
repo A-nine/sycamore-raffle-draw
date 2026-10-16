@@ -1,0 +1,104 @@
+/* Light mode — same brand palette (#26C615 green, #073042 navy, #FFFFFF white):
+   white surfaces, navy type, green accents. Enabled with <html data-theme="light">. */
+[data-theme="light"] .logo .on-dark { display: none; }
+[data-theme="light"] .logo .on-light { display: block; }
+[data-theme="light"] .theme-btn { background: #fff; border-color: var(--line); color: var(--navy); }
+[data-theme="light"] .theme-btn:hover { background: var(--light); }
+
+/* ---------- Admin shell ---------- */
+[data-theme="light"] .sidebar { background: #fff; color: var(--ink-2); border-right: 1px solid var(--line); }
+[data-theme="light"] .nav .eyebrow { color: var(--muted); }
+[data-theme="light"] .nav a { color: var(--ink-2); }
+[data-theme="light"] .nav a:hover { background: var(--light); }
+[data-theme="light"] .nav a.active { background: var(--cyan-100); color: var(--navy); }
+[data-theme="light"] .nav a.active svg { color: var(--green); }
+[data-theme="light"] .stage-box { background: var(--light); border-color: var(--line); color: var(--ink-2); }
+[data-theme="light"] .stage-ttl { color: var(--navy); }
+[data-theme="light"] .stage-box a { color: var(--navy); }
+[data-theme="light"] .me .who b, [data-theme="light"] .me button { color: var(--navy); }
+[data-theme="light"] .me .who small { color: var(--muted); }
+[data-theme="light"] .mobile-bar { background: #fff; border-bottom: 1px solid var(--line); }
+[data-theme="light"] .mobile-bar button { color: var(--navy); }
+[data-theme="light"] .shell.nav-open .sidebar { box-shadow: 0 0 0 100vmax rgba(7, 48, 66, .35); }
+
+/* Feature panels: navy blocks become white cards with a soft green glow */
+[data-theme="light"] .hero-draw,
+[data-theme="light"] .lock-card,
+[data-theme="light"] .draw-panel,
+[data-theme="light"] .winner-card {
+  background: radial-gradient(120% 120% at 0% 0%, rgba(38, 198, 21, .14), rgba(38, 198, 21, 0) 55%), #fff;
+  color: var(--navy); border: 1px solid var(--line); box-shadow: var(--shadow);
+}
+[data-theme="light"] .winner-card { border: 2px solid var(--green); }
+[data-theme="light"] .hero-draw .meta, [data-theme="light"] .lock-card p, [data-theme="light"] .draw-panel p,
+[data-theme="light"] .wc-meta, [data-theme="light"] .dp-count, [data-theme="light"] .lock-kv { color: var(--muted); }
+[data-theme="light"] .lock-kv span:last-child { color: var(--navy); }
+[data-theme="light"] .hashbox { background: var(--light); border-color: var(--green); }
+[data-theme="light"] .hashbox code { color: var(--muted); }
+[data-theme="light"] .hashbox.done code { color: var(--navy); }
+[data-theme="light"] .hash-chip { background: var(--light); color: var(--navy); }
+[data-theme="light"] .kbd { border-color: var(--line); color: var(--navy); }
+[data-theme="light"] .btn-ondark { background: #fff; color: var(--navy); border-color: var(--line); }
+[data-theme="light"] .btn-ondark:hover { background: var(--light); }
+[data-theme="light"] .badge-ondark { background: var(--light); color: var(--navy); border-color: var(--line); }
+[data-theme="light"] .eyebrow.gold { color: var(--navy); }
+
+/* Sign-in art panel */
+[data-theme="light"] .auth-art { background: radial-gradient(120% 90% at 20% 0%, rgba(38, 198, 21, .16), rgba(38, 198, 21, 0) 60%), var(--light); color: var(--navy); }
+[data-theme="light"] .auth-art p, [data-theme="light"] .auth-art .trust { color: var(--muted); }
+[data-theme="light"] .auth-art .trust svg { color: var(--green); }
+
+/* ---------- Tickertape (stage, preview, sign-in) ---------- */
+[data-theme="light"] .preview { background: linear-gradient(180deg, #fff, var(--light)); border: 1px solid var(--line); }
+[data-theme="light"] .preview .ptop { color: var(--navy); }
+[data-theme="light"] .preview .ptitle, [data-theme="light"] .preview .pfoot { color: var(--muted); }
+[data-theme="light"] .tape { border-color: var(--green); background: linear-gradient(180deg, rgba(38, 198, 21, .1), rgba(38, 198, 21, .02) 30%, rgba(38, 198, 21, .02) 70%, rgba(38, 198, 21, .1)); box-shadow: 0 0 40px rgba(38, 198, 21, .12); }
+[data-theme="light"] .slot { background: #fff; border: 1px solid var(--line); color: var(--navy); box-shadow: 0 4px 14px rgba(7, 48, 66, .06); }
+[data-theme="light"] .slot .sn { color: var(--muted); }
+[data-theme="light"] .slot .tg { color: var(--muted); }
+[data-theme="light"] .slot.won { background: var(--cyan-100); border: 2px solid var(--green); box-shadow: 0 0 34px rgba(38, 198, 21, .35); }
+[data-theme="light"] .slot.won .nm { color: var(--navy); }
+
+/* ---------- Live stage ---------- */
+[data-theme="light"] .stage-body { background: #fff; color: var(--navy); }
+[data-theme="light"] .stage { background: radial-gradient(60% 50% at 50% 0%, rgba(38, 198, 21, .14), rgba(38, 198, 21, 0) 70%), linear-gradient(180deg, #fff 0%, var(--light) 100%); }
+[data-theme="light"] .st-event { border-left-color: var(--line); }
+[data-theme="light"] .st-event #ev-meta, [data-theme="light"] .st-hero p, [data-theme="light"] .st-status { color: var(--muted); }
+[data-theme="light"] .st-foot { background: #fff; border-color: var(--line); box-shadow: var(--shadow); }
+[data-theme="light"] .st-foot > div { border-color: var(--line) !important; }
+[data-theme="light"] .st-foot .eyebrow { color: var(--muted); }
+[data-theme="light"] .st-foot .mono, [data-theme="light"] .st-foot a { color: var(--navy); }
+[data-theme="light"] .st-rounds span { background: #fff; border: 1px solid var(--line); color: var(--navy); }
+[data-theme="light"] .st-rounds span.on { background: var(--green); border-color: var(--green); }
+[data-theme="light"] .st-dim { background: rgba(7, 48, 66, .3); }
+[data-theme="light"] .st-modal { background: radial-gradient(90% 60% at 50% 0%, rgba(38, 198, 21, .14), rgba(38, 198, 21, 0) 70%), #fff; color: var(--navy); box-shadow: 0 0 120px rgba(38, 198, 21, .3), 0 40px 120px rgba(7, 48, 66, .25); }
+[data-theme="light"] .st-modal .eyebrow { color: var(--navy); }
+[data-theme="light"] .st-modal .chip { color: var(--navy); border-color: var(--line); background: var(--cyan-100); }
+[data-theme="light"] .st-modal .congrats { color: var(--muted); }
+[data-theme="light"] .st-modal .hash { background: var(--light); border-top-color: var(--line); }
+[data-theme="light"] .st-modal .hash code { color: var(--navy); }
+[data-theme="light"] .st-modal .hash a { color: var(--navy); text-decoration: underline; }
+[data-theme="light"] .st-sound, [data-theme="light"] .st-fs { background: #fff; border-color: var(--line); color: var(--navy); }
+[data-theme="light"] .st-fs::before { border-color: var(--navy); }
+
+/* ---------- Verify portal ---------- */
+[data-theme="light"] .v-nav { background: #fff; border: 1px solid var(--line); box-shadow: 0 10px 30px rgba(7, 48, 66, .08); }
+[data-theme="light"] .v-links a { color: var(--navy); }
+[data-theme="light"] .v-cta { background: var(--navy); color: #fff; }
+[data-theme="light"] .cert-top { background: radial-gradient(70% 140% at 100% 0%, rgba(38, 198, 21, .18), rgba(38, 198, 21, 0) 60%), var(--light); color: var(--navy); border-bottom: 1px solid var(--line); }
+[data-theme="light"] .cert-top p { color: var(--muted); }
+[data-theme="light"] .code-card { background: var(--light); color: var(--navy); border: 1px solid var(--line); }
+[data-theme="light"] .code-top { border-bottom-color: var(--line); color: var(--muted); }
+[data-theme="light"] .copy { border-color: var(--line); color: var(--navy); }
+[data-theme="light"] .dots i { background: rgba(7, 48, 66, .2); }
+[data-theme="light"] .dots i:nth-child(2) { background: rgba(7, 48, 66, .45); }
+[data-theme="light"] .dots i:nth-child(3) { background: var(--green); }
+[data-theme="light"] .code-card pre .k { color: var(--navy); font-weight: 700; }
+[data-theme="light"] .code-card pre .s { color: var(--muted); }
+[data-theme="light"] .code-card pre .c { color: var(--muted); }
+[data-theme="light"] .code-res { background: var(--cyan-100); }
+[data-theme="light"] .code-res div, [data-theme="light"] .code-res div.bad { color: var(--navy); }
+[data-theme="light"] .code-res svg { color: var(--green); }
+[data-theme="light"] .v-foot { background: var(--light); color: var(--navy); border-top: 1px solid var(--line); }
+[data-theme="light"] .v-foot p { color: var(--muted); }
+[data-theme="light"] .v-foot-links a { color: var(--navy); }

@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <script>try{if(localStorage.getItem("sr.theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}</script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sycamore Raffle Draw — Live stage</title>
   <meta name="theme-color" content="#073042">
@@ -11,6 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,500;9..40,700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/app.css">
   <link rel="stylesheet" href="assets/css/stage.css">
+  <link rel="stylesheet" href="assets/css/light.css">
 </head>
 <body class="stage-body">
   <div class="stage" id="stage">
@@ -43,6 +45,7 @@
     <div class="st-modal" id="modal" role="dialog" aria-live="assertive" aria-label="Winner"></div>
 
     <button class="st-sound" id="sound-btn">Click to enable sound</button>
+    <button class="theme-btn st-theme" data-theme-toggle title="Light / dark (T)"></button>
     <button class="st-fs" id="fs" title="Full screen (F)" aria-label="Full screen"></button>
   </div>
   <script src="assets/js/core.js"></script>

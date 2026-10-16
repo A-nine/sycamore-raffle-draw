@@ -4,6 +4,7 @@
   const { icon, logo, $, esc, fmt, pad5, store } = SR;
   $('#logo').innerHTML = logo({ white: true, href: 'verify.html' });
   $('#logo2').innerHTML = logo({ white: true });
+  SR.theme.bind();
 
   /* Same algorithm as the snippet shown on the page */
   async function check(meta, slots) {
